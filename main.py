@@ -113,7 +113,7 @@ def upload_progress(filename, currentBits, totalBits, speed, totaltime, args):
 
 async def compress(bot,ev,text,message,username):
         await  bot.edit_message(ev.chat,message,'📚Comprimiendo...')
-        text = str(text).replace('/rar ','')
+        text = str(text).replace('/7z ','')
         index = 0
         range = 0
         sizemb = 1900
@@ -169,7 +169,7 @@ async def onmessage(bot:TelegramClient,ev: NewMessage.Event,loop,ret=False):
 
     #if username not in config.ACCES_USERS:
     if username not in tl_admin_users:
-        await bot.send_message(ev.chat.id,'🛑No Tiene Acceso🛑')
+        await bot.send_message(ev.chat.id,'🛑TE Falta Calle🛑')
         return
 
     if not os.path.isdir(config.ROOT_PATH + username):
@@ -212,8 +212,8 @@ async def onmessage(bot:TelegramClient,ev: NewMessage.Event,loop,ret=False):
 
     if '/start' in text:
         reply = '👋FreeUltraUploader👋\nEs un bot para el manejo de archivos en telegam (descargas/subidas)\n\n'
-        reply += '<a href="https://github.com/Andierli">Andi Dev Github</a>\n'
-        reply += '<a href="https://t.me/Andi9919">Andi Dev Telegram</a>'
+        reply += '<a href="https://github.com/Andierli">Andi Github</a>\n'
+        reply += '<a href="https://t.me/Andi9919">Andi Telegram</a>'
         message = await bot.send_message(ev.chat.id,reply,parse_mode='html')
         pass
     if '/add' in text and username in godlist:
@@ -227,7 +227,7 @@ async def onmessage(bot:TelegramClient,ev: NewMessage.Event,loop,ret=False):
         print(tl_admin_users)
     
     if 'http' in text:
-        message = await bot.send_message(ev.chat.id,'⏳Verificando Enlace...🔗')
+        message = await bot.send_message(ev.chat.id,'⏳Validando Enlace...🔗')
         dl = Downloader(config.ROOT_PATH + username + '/')
         file = await dl.download_url(text,progressfunc=download_progress,args=(bot,ev,message),proxies=proxies)
         if file:
@@ -300,7 +300,7 @@ async def onmessage(bot:TelegramClient,ev: NewMessage.Event,loop,ret=False):
                   ffname = str(fi).split('/')[-1]
                   fsize = get_file_size(ffullpath)
                   if fsize>config.SPLIT_FILE:
-                      await bot.edit_message(ev.chat,message,text=f'{ffname} Demasiado Grande, Debe Comprimir\nSe Cancelo La Subida')
+                      await bot.edit_message(ev.chat,message,text=f'{ffname} papa deja el abuso, Debe Comprimir\nSe Cancelo La Subida')
                       return
                   await bot.edit_message(ev.chat,message,text=f'📤Subiendo {ffname}...')
                   result:RepoUploaderResult = None
@@ -332,7 +332,7 @@ async def onmessage(bot:TelegramClient,ev: NewMessage.Event,loop,ret=False):
             urls = []
             for item in resultlist:
                 urls.append(item.url)
-            await bot.edit_message(ev.chat,message,text=f'🔗Generando Links...')
+            await bot.edit_message(ev.chat,message,text=f'🔗Creando Links...')
             data = xdlink.parse(urls)
             if data:
                 txtfile.write(data)
